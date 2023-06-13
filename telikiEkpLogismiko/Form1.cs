@@ -21,5 +21,16 @@ namespace telikiEkpLogismiko
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = true;
+            label3.Visible = true;
+            label4.Visible = true;
+            textBox3.Visible = true;
+            textBox4.Visible = true;
+        }
     }
 }
