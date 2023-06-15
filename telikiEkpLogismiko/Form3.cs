@@ -15,6 +15,8 @@ namespace telikiEkpLogismiko
     {
         static string session;
         static string lesson;
+        
+        
         public Form3()
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace telikiEkpLogismiko
         }
 
 
-        public async void get_lesson_num(string ls)
+        public async void go_to_theory(string ls)
         {
 
             var con = new NpgsqlConnection(
@@ -43,15 +45,23 @@ namespace telikiEkpLogismiko
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
-                cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls}'";
+                cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls.ToLower()}'";
                 NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
 
                 while (await reader.ReadAsync())
                 {
                     if (reader.HasRows)
                     {
-                        Theory.set_chapters((int)reader[0]); 
+                        Theory.set_chapters((int)reader[ls.ToLower()]);
+                        Theory.set_session(session);
+                        Theory.set_lesson(lesson);
+                        
                     }
+                    else
+                    {
+                        Theory.set_chapters(5);
+                    }
+                    
                 }
                 cmd.Dispose();
 
@@ -68,7 +78,7 @@ namespace telikiEkpLogismiko
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            go_to_theory(label1.Text);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
