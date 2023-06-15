@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +33,39 @@ namespace telikiEkpLogismiko
 
         }
 
+
+        public async void get_lesson_num(string ls)
+        {
+
+            var con = new NpgsqlConnection(
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+            con.Open();
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = con;
+                cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls}'";
+                NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                while (await reader.ReadAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        Theory.set_chapters((int)reader[0]); 
+                    }
+                }
+                cmd.Dispose();
+
+            };
+            con.Close();
+
+            Theory th = new Theory();
+            this.Hide();
+            th.ShowDialog();
+            this.Show();
+
+        }
+
+
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
@@ -39,7 +73,26 @@ namespace telikiEkpLogismiko
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            Viewer v=new Viewer();
+            if (lesson.Equals("CyberSecurity")) {
+                Viewer.set_ofd("cyber_intro.pdf");
+                this.Hide();
+                v.ShowDialog();
+                this.Show();
+            }
+            else if (lesson.Equals("UI/UX DESIGN")) {
+                Viewer.set_ofd("data_science_intro.pdf");
+                this.Hide();
+                v.ShowDialog();
+                this.Show();
+            }
+            else if (lesson.Equals("DATA ANALYSIS")) {
 
+                Viewer.set_ofd("uxdesigner_intro.pdf");
+                this.Hide();
+                v.ShowDialog();
+                this.Show();
+            }
         }
     }
 }

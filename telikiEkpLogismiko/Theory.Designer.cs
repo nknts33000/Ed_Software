@@ -32,12 +32,14 @@
             // 
             // Theory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::telikiEkpLogismiko.Properties.Resources.VmZHnTO_4163944480;
-            this.ClientSize = new System.Drawing.Size(1110, 651);
+            this.ClientSize = new System.Drawing.Size(1480, 801);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Theory";
             this.Text = "theoria";
+            this.Load += new System.EventHandler(this.Theory_Load);
             this.ResumeLayout(false);
 
         }
