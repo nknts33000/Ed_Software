@@ -16,6 +16,7 @@ namespace telikiEkpLogismiko
         public Form2()
         {
             InitializeComponent();
+            label2.Text = "Hello "+session+"!";
         }
 
         public static void set_session(string us)

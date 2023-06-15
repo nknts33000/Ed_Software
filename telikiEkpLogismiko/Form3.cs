@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,23 +46,22 @@ namespace telikiEkpLogismiko
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
-                cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls.ToLower()}'";
+                cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls}';";
                 NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
-
+                Debug.WriteLine(ls);
                 while (await reader.ReadAsync())
                 {
+                    
                     if (reader.HasRows)
                     {
-                        Theory.set_chapters((int)reader[ls.ToLower()]);
+
+                        Theory.set_chapters((int)reader[0]) ;
                         Theory.set_session(session);
                         Theory.set_lesson(lesson);
                         
                     }
-                    else
-                    {
-                        Theory.set_chapters(5);
-                    }
                     
+
                 }
                 cmd.Dispose();
 
