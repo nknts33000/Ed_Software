@@ -91,14 +91,14 @@ namespace telikiEkpLogismiko
                 this.Show();
             }
             else if (lesson.Equals("UI/UX DESIGN")) {
-                Viewer.set_ofd("data_science_intro.pdf");
+                Viewer.set_ofd("uxdesigner_intro.pdf");
                 this.Hide();
                 v.ShowDialog();
                 this.Show();
             }
             else if (lesson.Equals("DATA ANALYSIS")) {
 
-                Viewer.set_ofd("uxdesigner_intro.pdf");
+                Viewer.set_ofd("data_science_intro.pdf");
                 this.Hide();
                 v.ShowDialog();
                 this.Show();
