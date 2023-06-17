@@ -112,6 +112,12 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quiz.Designer.cs">
+      <DependentUpon>Quiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quiz.resx">
+      <DependentUpon>Quiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer.resx">
       <DependentUpon>Viewer.cs</DependentUpon>

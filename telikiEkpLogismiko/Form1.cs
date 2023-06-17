@@ -63,7 +63,7 @@ namespace telikiEkpLogismiko
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
-                cmd.CommandText = $"INSERT INTO users (username, password, email, cybersec, ui, data_science) VALUES (@username, @password, @email, @cybersec, @ui, @datascience );";
+                cmd.CommandText = $"INSERT INTO users (username, password, email, CyberSecurity, UI/UX DESIGN, DATA ANALYSIS) VALUES (@username, @password, @email, @cybersec, @ui, @datascience );";
                 cmd.Parameters.AddWithValue("username",us);
                 cmd.Parameters.AddWithValue("password",pass);
                 cmd.Parameters.AddWithValue("email", email);
