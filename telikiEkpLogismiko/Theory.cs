@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -60,6 +61,7 @@ namespace telikiEkpLogismiko
         public Theory()
         {
             InitializeComponent();
+            Debug.WriteLine(lesson);
             for (int i = 1; i <= chapters; i++)
             {
                 ExtendedLinkLabel lb = new ExtendedLinkLabel();
@@ -117,14 +119,15 @@ namespace telikiEkpLogismiko
         private void final_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
                 cmd.CommandText = $"SELECT * FROM quiz_results WHERE username='{session}' AND lesson='{lesson}';";
-                NpgsqlDataReader reader = cmd.ExecuteReader();
 
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+               
                 //while (reader.Read())
                 //{
                 int i = 0;
@@ -132,14 +135,28 @@ namespace telikiEkpLogismiko
                 {
                     i++;
                 }
+                reader.Close();
                 if (i == chapters)
                 {
-                    Test.set_lesson(lesson);
-                    Test.set_session(session);
-                    Test t=new Test();
-                    this.Hide();
-                    t.ShowDialog();
-                    this.Show();
+                    cmd.CommandText = $"SELECT * FROM test_results WHERE username='{session}' AND lesson='{lesson}';";
+                    NpgsqlDataReader reader2 = cmd.ExecuteReader();
+                    
+                    
+                    if (reader2.Read())
+                    {
+                        MessageBox.Show("You have completed the lesson's evaluation.");
+                    }
+                    else 
+                    {
+                        Test.set_lesson(lesson);
+                        Test.set_session(session);
+                        Test t = new Test();
+                        this.Hide();
+                        t.ShowDialog();
+                        this.Show();
+                    }
+                    
+                    
                 }
                 else 
                 {

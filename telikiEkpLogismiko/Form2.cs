@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,7 @@ namespace telikiEkpLogismiko
         private void open_f3()
         {
             Form3 f3=new Form3();
+            
             this.Hide();
             f3.ShowDialog();
             this.Show();

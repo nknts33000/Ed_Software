@@ -24,6 +24,7 @@ namespace telikiEkpLogismiko
             label1.Visible = true;
             label1.Text = lesson;
             label2.Text = "Hello " + session + "!";
+            Debug.WriteLine(lesson);
         }
         public static void set_session(string us)
         {
@@ -42,7 +43,7 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {

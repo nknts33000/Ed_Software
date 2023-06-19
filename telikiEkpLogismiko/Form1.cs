@@ -58,7 +58,7 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
@@ -96,7 +96,7 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
