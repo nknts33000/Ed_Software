@@ -23,6 +23,7 @@ namespace telikiEkpLogismiko
             InitializeComponent();
             label1.Visible = true;
             label1.Text = lesson;
+            label2.Text = "Hello " + session + "!";
         }
         public static void set_session(string us)
         {
@@ -41,14 +42,14 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
                 cmd.CommandText = $"SELECT chapters FROM lessons WHERE lesson_name='{ls}';";
                 NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
-                Debug.WriteLine(ls);
+                
                 while (await reader.ReadAsync())
                 {
                     
@@ -90,8 +91,8 @@ namespace telikiEkpLogismiko
                 v.ShowDialog();
                 this.Show();
             }
-            else if (lesson.Equals("UI/UX DESIGN")) {
-                Viewer.set_ofd("uxdesigner_intro.pdf");
+            else if (lesson.Equals("DBMS")) {
+                Viewer.set_ofd("dbms_intro.pdf");
                 this.Hide();
                 v.ShowDialog();
                 this.Show();

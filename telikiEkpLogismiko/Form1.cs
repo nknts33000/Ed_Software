@@ -58,19 +58,19 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
-                cmd.CommandText = $"INSERT INTO users (username, password, email, CyberSecurity, UI/UX DESIGN, DATA ANALYSIS) VALUES (@username, @password, @email, @cybersec, @ui, @datascience );";
+                cmd.CommandText = $"INSERT INTO users (username, password, email, CyberSecurity, DBMS, DATA ANALYSIS) VALUES (@username, @password, @email, @cybersec, @DBMS, @datascience );";
                 cmd.Parameters.AddWithValue("username",us);
                 cmd.Parameters.AddWithValue("password",pass);
                 cmd.Parameters.AddWithValue("email", email);
                 //cmd.Parameters.AddWithValue("CyberSec", 0);
                 cmd.Parameters.AddWithValue("cybersec", 0);
                 
-                cmd.Parameters.AddWithValue("ui", 0);
+                cmd.Parameters.AddWithValue("DBMS", 0);
                 cmd.Parameters.AddWithValue("datascience", 0);
                 // cmd.Parameters.AddWithValue("UI", 0);
                 await cmd.ExecuteNonQueryAsync();
@@ -96,7 +96,7 @@ namespace telikiEkpLogismiko
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {

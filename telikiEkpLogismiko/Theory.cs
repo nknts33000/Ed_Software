@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -73,7 +74,7 @@ namespace telikiEkpLogismiko
                 lb.set_chapter(i);
                 this.Controls.Add(lb);
 
-
+                label2.Text = "Hello " + session + "!";
             }
 
 
@@ -111,6 +112,46 @@ namespace telikiEkpLogismiko
         {
             chapters = ch;
 
+        }
+
+        private void final_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var con = new NpgsqlConnection(
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+            con.Open();
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = con;
+                cmd.CommandText = $"SELECT * FROM quiz_results WHERE username='{session}' AND lesson='{lesson}';";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                //while (reader.Read())
+                //{
+                int i = 0;
+                while(reader.Read())
+                {
+                    i++;
+                }
+                if (i == chapters)
+                {
+                    Test.set_lesson(lesson);
+                    Test.set_session(session);
+                    Test t=new Test();
+                    this.Hide();
+                    t.ShowDialog();
+                    this.Show();
+                }
+                else 
+                {
+                    MessageBox.Show("You have to take quizzes of all chapters before taking the final test.");
+                }
+                
+                
+                //}
+                cmd.Dispose();
+
+            };
+            con.Close();
         }
     }
 }

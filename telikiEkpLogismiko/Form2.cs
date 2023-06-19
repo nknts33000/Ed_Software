@@ -27,18 +27,21 @@ namespace telikiEkpLogismiko
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form3.set_lesson(linkLabel3.Text);
+            Form3.set_session(session);
             open_f3();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form3.set_lesson(linkLabel1.Text);
+            Form3.set_session(session);
             open_f3();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form3.set_lesson(linkLabel2.Text);
+            Form3.set_session(session);
             open_f3();
         }
 

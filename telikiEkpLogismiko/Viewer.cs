@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,8 +27,8 @@ namespace telikiEkpLogismiko
         public Viewer()
         {
             InitializeComponent();
-            
-            //button1_Click(null, null);
+            label1.Text = "Hello " + session + "!";
+           //button1_Click(null, null);
 
         }
 
@@ -72,6 +73,39 @@ namespace telikiEkpLogismiko
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+            var con = new NpgsqlConnection(
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
+            con.Open();
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = con;
+                cmd.CommandText = $"SELECT * FROM quiz_results WHERE username='{session}' AND lesson='{lesson}' AND chapter='{chapter}';";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                //while (reader.Read())
+                //{
+                    if (reader.Read())
+                    {
+                    MessageBox.Show("You have already taken this quiz.");
+                    }
+                    else 
+                    {
+                        Quiz.set_chapter(chapter);
+                        Quiz.set_lesson(lesson);
+                        Quiz.set_session(session);
+                        Quiz quiz = new Quiz();
+                        this.Hide();
+                        quiz.ShowDialog();
+                        this.Show();
+                    }
+                //}
+                cmd.Dispose();
+
+            };
+            con.Close();
+
+           
+            
         }
     }
 }
