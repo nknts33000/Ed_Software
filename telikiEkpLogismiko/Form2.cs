@@ -80,14 +80,14 @@ namespace telikiEkpLogismiko
                     {
                         if (tests_data.First().Value.Equals("CyberSecurity"))
                         {
-                            Form4 f4= new Form4();
+                            Form4 f4 = new Form4();
                             f4.set_label("After your self-assessment, we see that the branch of CyberSecurity would suit you\r\nBelow we suggest some postgraduate courses close to this subject,\r\nto further expand your industry knowledge\r\n\r\nIn the professional field, some of the specializations that seem to suit you are Security Analyst,\nPenetration Tester,DevSecOps or any other Security specialization.");
                             f4.set_link_label("https://cybersecdatasci.cs.unipi.gr/");
                             this.Hide();
                             f4.ShowDialog();
                             this.Show();
                         }
-                        else if(tests_data.First().Value.Equals("DBMS"))
+                        else if (tests_data.First().Value.Equals("DBMS"))
                         {
                             Form4 f4 = new Form4();
                             f4.set_label("After your self-assessment, we see that the branch of Database Administration would suit you\r\nBelow we suggest some postgraduate courses close to this subject,\r\nto further expand your industry knowledge\r\n\r\nIn the professional field, some of the specializations that seem to suit you are \nDatabase Administrator/Engineer, DevOps");
@@ -105,6 +105,10 @@ namespace telikiEkpLogismiko
                             f4.ShowDialog();
                             this.Show();
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your grades are not high enough for us to recommend you any specialization.\r\n We suggest you revise and improve your skills so we can guide you.");
                     }
 
                 }
