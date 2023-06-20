@@ -34,6 +34,7 @@ namespace telikiEkpLogismiko
             button1.Visible = false;
             button2.Visible = false;
             button3.Visible = true;
+            button4.Visible = true;
             label3.Visible = true;
             label4.Visible = true;
             textBox3.Visible = true;
@@ -43,8 +44,23 @@ namespace telikiEkpLogismiko
         private void button3_Click(object sender, EventArgs e)
         {
             if ((textBox2.Text).Equals((textBox3.Text))) {
-                label5.Visible = false; 
-                registration(textBox1.Text,textBox2.Text,textBox4.Text);
+                label5.Visible = false;
+                if (!textBox1.Equals("") && !textBox2.Equals("") && !textBox3.Equals("") && !textBox4.Equals(""))
+                {
+                    registration(textBox1.Text, textBox2.Text, textBox4.Text);
+                    button1.Visible = true;
+                    button2.Visible = true;
+                    button3.Visible = false;
+                    button4.Visible = false;
+                    label3.Visible = false;
+                    label4.Visible = false;
+                    textBox3.Visible = false;
+                    textBox4.Visible = false;
+                }
+                else 
+                {
+                    MessageBox.Show("Fill all fields.");
+                }
             } 
             else
             {
@@ -54,11 +70,11 @@ namespace telikiEkpLogismiko
            
         }
 
-        public async void registration(string us,string pass, string email)
+        public void registration(string us,string pass, string email)
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
@@ -73,7 +89,7 @@ namespace telikiEkpLogismiko
                 cmd.Parameters.AddWithValue("DBMS", 0);
                 cmd.Parameters.AddWithValue("datascience", 0);
                 // cmd.Parameters.AddWithValue("UI", 0);
-                await cmd.ExecuteNonQueryAsync();
+                cmd.ExecuteNonQuery();
                 cmd.Dispose();
             } ;
             con.Close();
@@ -92,36 +108,37 @@ namespace telikiEkpLogismiko
         }
 
 
-        public async void sign_in(string us, string pass)
+        public void sign_in(string us, string pass)
         {
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
                 cmd.Connection = con;
                 cmd.CommandText = $"SELECT * FROM users WHERE username='{us}' AND password='{pass}'";
-                NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
-               
-                while (await reader.ReadAsync())
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    if (reader.HasRows) { 
-                        session = (string)reader[0]; //throws username to the next form
-                        
-                    
-                        Form2.set_session(session);
-                    }
+                    session = (string)reader[0]; //throws username to the next form
+                    Form2.set_session(session);
+                    Form2 f2 = new Form2();
+                    this.Hide();
+                    f2.ShowDialog();
+                    this.Close();
+                }
+                else 
+                {
+                    MessageBox.Show("Your username or password are incorrect");
                 }
                 cmd.Dispose();
 
             };
             con.Close();
 
-            Form2 f2 = new Form2();
-            this.Hide();
-            f2.ShowDialog();
-            this.Close();
+           
             
               
 
@@ -129,5 +146,16 @@ namespace telikiEkpLogismiko
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button1.Visible = true;
+            button2.Visible = true;
+            button3.Visible = false;
+            button4.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            textBox3.Visible = false;
+            textBox4.Visible = false;
+        }
     }
 }

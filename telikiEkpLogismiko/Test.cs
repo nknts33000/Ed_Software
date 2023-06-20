@@ -25,7 +25,7 @@ namespace telikiEkpLogismiko
         static List<string> corrects = new List<string>();
         static List<Label> label_list = new List<Label>();
         static List<ComboBox> combobox_list = new List<ComboBox>();
-
+        static double total;
         public Test()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace telikiEkpLogismiko
             combobox_list.Add(comboBox5);
             combobox_list.Add(comboBox6);
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
@@ -125,7 +125,7 @@ namespace telikiEkpLogismiko
                 
 
             var con = new NpgsqlConnection(
-    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=6972419550n;Database=ed_software;");
+    connectionString: "Server=localhost;Port=5432;User Id=postgres;Password=2505;Database=ed_software;");
             con.Open();
             using (var cmd = new NpgsqlCommand())
             {
@@ -152,10 +152,20 @@ namespace telikiEkpLogismiko
                     x += reader.GetDouble(0);  
                 }
                 reader.Close();
-                double total = (x / j + final) / 2;
-
-                cmd.CommandText = $"UPDATE users  SET {lesson}={total} WHERE username='{session}';";
-
+                total = (x / j + final) / 2;
+                if (lesson.Equals("CyberSecurity")) 
+                {
+                    cmd.CommandText = $"UPDATE users SET \"CyberSecurity\"={total} WHERE username = '{session}';";
+                }
+                else if (lesson.Equals("DATA ANALYSIS")) 
+                {
+                    cmd.CommandText = $"UPDATE users SET \"DATA ANALYSIS\"={total} WHERE username = '{session}';";
+                }
+                else if(lesson.Equals("DBMS"))
+                {
+                    cmd.CommandText = $"UPDATE users SET \"DBMS\"={total} WHERE username = '{session}';";
+                }
+                
                 
 
                 cmd.ExecuteNonQuery();
